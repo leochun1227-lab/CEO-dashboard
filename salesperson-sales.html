@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Salesperson Sales</title>
+<link rel="stylesheet" href="dealership-dashboard.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Frankston Dashboard</p>
+      <h1>Salesperson Sales</h1>
+      <p class="subtitle">Individual salesperson sales view for activity, progress, and handover tracking.</p>
+    </div>
+    <nav class="navActions">
+      <a class="btn primary" href="dealership-dashboard.html">Dealership Dashboard</a>
+      <a class="btn" href="yard-sales.html">Yard Sales</a>
+    </nav>
+  </header>
+
+  <section class="panel">
+    <h2>Salesperson Overview</h2>
+    <p>Use these panels as the salesperson-level dashboard entry points.</p>
+    <div class="metricGrid">
+      <div class="metric" style="--accent: var(--blue)">
+        <small>Salesperson 1</small>
+        <b>Sales Activity</b>
+        <span>Assigned opportunities, sold units, and follow-up activity.</span>
+      </div>
+      <div class="metric" style="--accent: var(--teal)">
+        <small>Salesperson 2</small>
+        <b>Sales Activity</b>
+        <span>Assigned opportunities, sold units, and follow-up activity.</span>
+      </div>
+      <div class="metric" style="--accent: var(--amber)">
+        <small>Salesperson 3</small>
+        <b>Sales Activity</b>
+        <span>Assigned opportunities, sold units, and follow-up activity.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="panelGrid" style="margin-top:18px">
+    <article class="panel">
+      <p class="eyebrow">Pipeline</p>
+      <h2>Lead Movement</h2>
+      <div class="metricGrid">
+        <div class="metric" style="--accent: var(--blue)"><small>Stage</small><b>Allocated</b><span>Leads allocated to the salesperson.</span></div>
+        <div class="metric" style="--accent: var(--teal)"><small>Stage</small><b>In Progress</b><span>Active leads being worked.</span></div>
+        <div class="metric" style="--accent: var(--amber)"><small>Stage</small><b>Opportunity</b><span>Qualified opportunities ready for action.</span></div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <p class="eyebrow">Results</p>
+      <h2>Sales Performance</h2>
+      <div class="metricGrid">
+        <div class="metric" style="--accent: var(--blue)"><small>MTD</small><b>Units Sold</b><span>Monthly salesperson sales volume.</span></div>
+        <div class="metric" style="--accent: var(--teal)"><small>YTD</small><b>Units Sold</b><span>Year-to-date salesperson sales volume.</span></div>
+        <div class="metric" style="--accent: var(--amber)"><small>Delivery</small><b>Handovers</b><span>Completed handovers by salesperson.</span></div>
+      </div>
+    </article>
+  </section>
+</main>
+</body>
+</html>

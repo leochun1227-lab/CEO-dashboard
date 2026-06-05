@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frankston Dashboard</title>
+<link rel="stylesheet" href="dealership-dashboard.css">
+</head>
+<body>
+<main class="shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Dealership Dashboard</p>
+      <h1>Frankston Dashboard</h1>
+      <p class="subtitle">Frankston dealership overview with shortcuts into the sales boards.</p>
+    </div>
+    <nav class="navActions">
+      <a class="btn primary" href="dealership-dashboard.html">Dealership Dashboard</a>
+      <a class="btn" href="index.html">Portal Home</a>
+    </nav>
+  </header>
+
+  <section class="panel">
+    <h2>Overview</h2>
+    <p>Use this page as the Frankston dealership landing view. The cards below can be connected to live figures later.</p>
+    <div class="metricGrid">
+      <div class="metric" style="--accent: var(--blue)">
+        <small>MTD</small>
+        <b>Sales Snapshot</b>
+        <span>New, used, gross profit, and handover activity.</span>
+      </div>
+      <div class="metric" style="--accent: var(--teal)">
+        <small>YTD</small>
+        <b>Performance Track</b>
+        <span>Year-to-date dealership sales and budget movement.</span>
+      </div>
+      <div class="metric" style="--accent: var(--amber)">
+        <small>People</small>
+        <b>Salesperson View</b>
+        <span>Individual salesperson performance and follow-up view.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid" style="margin-top:18px" aria-label="Frankston dashboard links">
+    <a class="card hubCard" style="--accent: var(--teal)" href="yard-sales.html">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h18"/><path d="M6 7v13"/><path d="M18 7v13"/><path d="M8 12h8"/><path d="M8 16h5"/></svg>
+      </span>
+      <div>
+        <h2>Yard Sales</h2>
+        <p>Open the yard sales detail board.</p>
+      </div>
+      <span class="arrow">&rsaquo;</span>
+    </a>
+
+    <a class="card hubCard" style="--accent: var(--amber)" href="salesperson-sales.html">
+      <span class="icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="4"/><path d="M16 21v-2a4 4 0 0 0-8 0v2"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+      </span>
+      <div>
+        <h2>Salesperson Sales</h2>
+        <p>Open the salesperson sales detail board.</p>
+      </div>
+      <span class="arrow">&rsaquo;</span>
+    </a>
+  </section>
+</main>
+</body>
+</html>

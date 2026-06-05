@@ -1,0 +1,225 @@
+:root {
+  --bg: #f4f7fb;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #dce6f2;
+  --panel: #ffffff;
+  --blue: #2563eb;
+  --sky: #0ea5e9;
+  --teal: #0f766e;
+  --amber: #d97706;
+  --shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #eef6ff 0%, var(--bg) 46%, #eef3f8 100%);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+}
+
+.shell {
+  min-height: 100vh;
+  padding: 26px clamp(18px, 4vw, 46px) 38px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.eyebrow {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 10px 0 0;
+  max-width: 660px;
+}
+
+.navActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  color: #334155;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  text-decoration: none;
+  font-weight: 750;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+}
+
+.btn.primary {
+  background: #eaf4ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card,
+.panel {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.hubCard {
+  display: grid;
+  min-height: 220px;
+  padding: 22px;
+  color: inherit;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+}
+
+.hubCard:before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: var(--accent, var(--blue));
+}
+
+.hubCard:hover {
+  transform: translateY(-2px);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--accent, var(--blue));
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.18);
+}
+
+.icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.hubCard h2,
+.panel h2 {
+  margin: 18px 0 8px;
+  font-size: 22px;
+}
+
+.hubCard p,
+.panel p,
+.metric span {
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.arrow {
+  align-self: end;
+  color: var(--accent, var(--blue));
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.panel {
+  padding: 22px;
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.metric {
+  background: #f8fbff;
+  border: 1px solid #e2edf8;
+  border-radius: 14px;
+  padding: 14px;
+  min-height: 94px;
+}
+
+.metric b {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.metric small {
+  color: var(--accent, var(--blue));
+  display: block;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.stack {
+  display: grid;
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .topbar {
+    display: block;
+  }
+
+  .navActions {
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+
+  .grid,
+  .panelGrid,
+  .metricGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -10,7 +10,14 @@ window.PORTAL_DATA = {
       id: "dealerships",
       name: "Dealerships",
       note: "Dealer network",
-      links: [],
+      links: [
+        {
+          id: "dealership-dashboard",
+          name: "Dealership Dashboard",
+          url: "dealership-dashboard.html",
+          note: "Frankston, yard sales, and salesperson sales",
+        },
+      ],
     },
     {
       id: "spare-parts",
