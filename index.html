@@ -20,7 +20,7 @@
 <div class="page">
   <header class="topbar">
     <div class="brand"><div class="brandMark"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div><div><h1>Regent Home Portal</h1><p>Simple internal launch page for every team tool.</p></div></div>
-    <div class="actions"><button id="editorSwitch" class="editorSwitch" onclick="toggleEditor()"><span class="switchDot">✎</span><span id="editorText">Editor Off</span></button><span id="syncStatus" class="syncStatus warn">Local only</span><div class="editorTools"><button class="btn primary" onclick="openLinkModal()">+ Add Link</button><button class="btn" onclick="openModuleModal()">+ Add Module</button><button class="btn" onclick="syncNow()">Sync Now</button><button class="btn" onclick="openDataModal()">Backup / Import</button></div></div>
+    <div class="actions"><button id="editorSwitch" class="editorSwitch" onclick="toggleEditor()" hidden><span class="switchDot">&#9998;</span><span id="editorText">Editor Off</span></button><div class="editorTools"><button class="btn primary" onclick="openLinkModal()">+ Add Link</button><button class="btn" onclick="openModuleModal()">+ Add Module</button><button class="btn" onclick="exportDataFile()">Export Data</button><button class="btn" onclick="openDataModal()">Backup / Import</button></div></div>
   </header>
   <section class="hero"><div class="heroInner"><h2>Quick Jump</h2><div class="searchWrap"><input id="searchInput" class="input" placeholder="Search name or URL..." oninput="render()"><button class="btn dark editorTools" onclick="openLinkModal()">Create</button></div></div></section>
   <main class="portalCanvas" id="moduleGrid"></main>
@@ -32,10 +32,11 @@
   <button class="floatingHome" onclick="goHome()" title="Back to Home"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></button>
 </div>
 
-<div id="linkModal" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="linkModalTitle">Add Link</h3><button class="iconBtn" onclick="closeModals()">✕</button></div><div class="modalBody"><div class="formGrid"><div class="field"><label>Display Name</label><input id="linkName" class="input" placeholder="e.g. Dealer Workbench"></div><div class="field"><label>Module</label><select id="linkModule" class="select"></select></div><div class="field full"><label>URL / HTML file path</label><input id="linkUrl" class="input" placeholder="e.g. dealer-workbench.html or https://example.com"></div><div class="field full"><label>Short note</label><input id="linkNote" class="input" placeholder="Optional description"></div></div></div><div class="modalFoot"><button class="btn" onclick="closeModals()">Cancel</button><button id="deleteLinkBtn" class="btn danger hide" onclick="deleteEditingLink()">Delete</button><button class="btn primary" onclick="saveLink()">Save Link</button></div></div></div>
-<div id="moduleModal" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="moduleModalTitle">Add Module</h3><button class="iconBtn" onclick="closeModals()">✕</button></div><div class="modalBody"><div class="formGrid"><div class="field"><label>Module Name</label><input id="moduleName" class="input" placeholder="e.g. Dealer Portal"></div><div class="field"><label>Sub Title</label><input id="moduleNote" class="input" placeholder="Optional"></div></div></div><div class="modalFoot"><button class="btn" onclick="closeModals()">Cancel</button><button id="deleteModuleBtn" class="btn danger hide" onclick="deleteEditingModule()">Delete</button><button class="btn primary" onclick="saveModule()">Save Module</button></div></div></div>
-<div id="dataModal" class="modalBack"><div class="modal"><div class="modalHead"><h3>Backup / Import</h3><button class="iconBtn" onclick="closeModals()">✕</button></div><div class="modalBody"><div class="formGrid"><div class="field"><label>Cloud API URL</label><input id="syncEndpoint" class="input" placeholder="https://your-worker.workers.dev"></div><div class="field"><label>Editor PIN</label><input id="syncToken" class="input" type="password" autocomplete="current-password" placeholder="Required for cloud save"></div></div><p style="margin:0;color:#607089;line-height:1.5">Copy this JSON as backup, or paste edited JSON and import it.</p><textarea id="dataText" class="textarea"></textarea></div><div class="modalFoot"><button class="btn" onclick="saveCloudSettings()">Save Cloud Settings</button><button class="btn" onclick="pullCloudFromModal()">Pull Cloud</button><button class="btn" onclick="exportData()">Refresh Export</button><button class="btn primary" onclick="importData()">Import JSON</button></div></div></div>
+<div id="linkModal" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="linkModalTitle">Add Link</h3><button class="iconBtn" onclick="closeModals()">&times;</button></div><div class="modalBody"><div class="formGrid"><div class="field"><label>Display Name</label><input id="linkName" class="input" placeholder="e.g. Dealer Workbench"></div><div class="field"><label>Module</label><select id="linkModule" class="select"></select></div><div class="field full"><label>URL / HTML file path</label><input id="linkUrl" class="input" placeholder="e.g. dealer-workbench.html or https://example.com"></div><div class="field full"><label>Short note</label><input id="linkNote" class="input" placeholder="Optional description"></div></div></div><div class="modalFoot"><button class="btn" onclick="closeModals()">Cancel</button><button id="deleteLinkBtn" class="btn danger hide" onclick="deleteEditingLink()">Delete</button><button class="btn primary" onclick="saveLink()">Save Link</button></div></div></div>
+<div id="moduleModal" class="modalBack"><div class="modal"><div class="modalHead"><h3 id="moduleModalTitle">Add Module</h3><button class="iconBtn" onclick="closeModals()">&times;</button></div><div class="modalBody"><div class="formGrid"><div class="field"><label>Module Name</label><input id="moduleName" class="input" placeholder="e.g. Dealer Portal"></div><div class="field"><label>Sub Title</label><input id="moduleNote" class="input" placeholder="Optional"></div></div></div><div class="modalFoot"><button class="btn" onclick="closeModals()">Cancel</button><button id="deleteModuleBtn" class="btn danger hide" onclick="deleteEditingModule()">Delete</button><button class="btn primary" onclick="saveModule()">Save Module</button></div></div></div>
+<div id="dataModal" class="modalBack"><div class="modal"><div class="modalHead"><h3>Backup / Import</h3><button class="iconBtn" onclick="closeModals()">&times;</button></div><div class="modalBody"><textarea id="dataText" class="textarea"></textarea></div><div class="modalFoot"><button class="btn" onclick="resetDraft()">Use Published</button><button class="btn" onclick="exportData()">Refresh Export</button><button class="btn" onclick="exportDataFile()">Export Data</button><button class="btn primary" onclick="importData()">Import JSON</button></div></div></div>
 
+<script src="portal-data.js"></script>
 <script>
 const STORAGE_KEY="regent_home_portal_v2_grid";
 const EDITOR_KEY="regent_home_portal_editor_mode";
@@ -51,7 +52,7 @@ const defaultData={modules:[
 ]};
 
 let data=loadLocalData();
-let editorMode=localStorage.getItem(EDITOR_KEY)==="1";
+let editorMode=(location.protocol==="file:"||["","localhost","127.0.0.1","::1"].includes(location.hostname))&&localStorage.getItem(EDITOR_KEY)==="1";
 let syncEndpoint=(window.PORTAL_SYNC_URL||localStorage.getItem(SYNC_ENDPOINT_KEY)||"").trim();
 let editorToken=localStorage.getItem(SYNC_TOKEN_KEY)||"";
 let editingLink=null;
@@ -106,6 +107,245 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModals()});
 refreshSyncStatus();
 setEditorMode(editorMode);
 pullRemoteData(false);
+</script>
+<script>
+(function () {
+  const LOCAL_EDITOR_HOSTS = new Set(["", "localhost", "127.0.0.1", "::1"]);
+  const EDITOR_AVAILABLE = location.protocol === "file:" || LOCAL_EDITOR_HOSTS.has(location.hostname);
+  const DRAFT_KEY = "regent_home_portal_v2_grid";
+  const LEGACY_DRAFT_KEY = "regent_home_portal_v1";
+  const MODE_KEY = "regent_home_portal_editor_mode";
+  const fallbackData = {
+    modules: [
+      { id: "after-sales-started", name: "After-Sales (Started)", note: "After-sales operations", links: [] },
+      { id: "dealerships", name: "Dealerships", note: "Dealer network", links: [] },
+      { id: "spare-parts", name: "Spare Parts", note: "Parts availability", links: [] },
+      { id: "inventory", name: "Inventory", note: "Stock control", links: [] },
+      { id: "service-centre", name: "Service Centre", note: "Service operations", links: [] },
+    ],
+  };
+
+  function clone(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function cleanPortalData(value) {
+    if (!value || !Array.isArray(value.modules)) return clone(fallbackData);
+    return {
+      modules: value.modules.map((module) => {
+        const source = module && typeof module === "object" ? module : {};
+        return {
+          id: String(source.id || uid()),
+          name: String(source.name || "Untitled Module"),
+          note: String(source.note || ""),
+          links: Array.isArray(source.links)
+            ? source.links.map((link) => {
+                const item = link && typeof link === "object" ? link : {};
+                return {
+                  id: String(item.id || uid()),
+                  name: String(item.name || "Untitled Link"),
+                  url: String(item.url || "#"),
+                  note: String(item.note || ""),
+                };
+              })
+            : [],
+        };
+      }),
+    };
+  }
+
+  const publishedData = migratePublishedData(cleanPortalData(window.PORTAL_DATA || fallbackData));
+
+  isPortalData = function (value) {
+    return !!value && Array.isArray(value.modules);
+  };
+
+  migrateModuleNames = function (value) {
+    return migratePublishedData(cleanPortalData(value));
+  };
+
+  function migratePublishedData(value) {
+    const oldNames = ["Manager Portal", "Sales Portal", "Aftersales", "Material"];
+    if (!value.modules.some((module) => oldNames.includes(module.name))) return value;
+    const migrated = clone(value);
+    fallbackData.modules.forEach((target, index) => {
+      const module = migrated.modules[index];
+      if (module) {
+        module.id = target.id;
+        module.name = target.name;
+        module.note = target.note;
+        module.links = Array.isArray(module.links) ? module.links : [];
+      } else {
+        migrated.modules.push(clone(target));
+      }
+    });
+    return migrated;
+  }
+
+  function loadDraft() {
+    if (!EDITOR_AVAILABLE) return null;
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY) || localStorage.getItem(LEGACY_DRAFT_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      return isPortalData(parsed) ? migrateModuleNames(parsed) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function configureEditorShell() {
+    const editorSwitch = $("editorSwitch");
+    if (editorSwitch) editorSwitch.hidden = !EDITOR_AVAILABLE;
+    const syncStatus = $("syncStatus");
+    if (syncStatus) syncStatus.hidden = true;
+    const syncButton = document.querySelector('button[onclick="syncNow()"]');
+    if (syncButton) {
+      syncButton.textContent = "Export Data";
+      syncButton.onclick = exportDataFile;
+    }
+    configureDataModal();
+  }
+
+  function configureDataModal() {
+    const modal = $("dataModal");
+    if (!modal) return;
+    modal.querySelector(".formGrid")?.classList.add("hide");
+    modal.querySelector(".modalBody p")?.classList.add("hide");
+    const buttons = modal.querySelectorAll(".modalFoot .btn");
+    if (buttons[0]) {
+      buttons[0].textContent = "Use Published";
+      buttons[0].onclick = resetDraft;
+    }
+    if (buttons[1]) {
+      buttons[1].textContent = "Refresh Export";
+      buttons[1].onclick = exportData;
+    }
+    if (buttons[2]) {
+      buttons[2].textContent = "Export Data";
+      buttons[2].onclick = exportDataFile;
+    }
+  }
+
+  function portalDataJs() {
+    return `window.PORTAL_DATA = ${JSON.stringify(data, null, 2)};\n`;
+  }
+
+  async function exportDataFile() {
+    if (!requireEditor()) return false;
+    exportData();
+    const blob = new Blob([portalDataJs()], { type: "application/javascript" });
+    if (window.showSaveFilePicker) {
+      try {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: "portal-data.js",
+          types: [{ description: "JavaScript data file", accept: { "application/javascript": [".js"] } }],
+        });
+        const writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        alert("Data exported.");
+        return true;
+      } catch (error) {
+        if (error && error.name === "AbortError") return false;
+      }
+    }
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "portal-data.js";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    return true;
+  }
+
+  function persistDraft() {
+    if (EDITOR_AVAILABLE) localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+  }
+
+  saveData = function () {
+    persistDraft();
+  };
+
+  setEditorMode = function (on) {
+    editorMode = EDITOR_AVAILABLE && !!on;
+    if (EDITOR_AVAILABLE) localStorage.setItem(MODE_KEY, editorMode ? "1" : "0");
+    document.body.classList.toggle("editor", editorMode);
+    $("editorSwitch")?.classList.toggle("active", editorMode);
+    if ($("editorText")) $("editorText").textContent = editorMode ? "Editor On" : "Editor Off";
+    render();
+  };
+
+  toggleEditor = function () {
+    if (!EDITOR_AVAILABLE) return;
+    setEditorMode(!editorMode);
+  };
+
+  requireEditor = function () {
+    return EDITOR_AVAILABLE && editorMode;
+  };
+
+  ensureEditorToken = function () {
+    return EDITOR_AVAILABLE;
+  };
+
+  window.exportDataFile = exportDataFile;
+  window.resetDraft = resetDraft;
+  syncNow = exportDataFile;
+  saveCloudSettings = resetDraft;
+  pullCloudFromModal = exportDataFile;
+  pullRemoteData = async function () {
+    return false;
+  };
+  pushRemoteData = async function () {
+    return exportDataFile();
+  };
+  refreshSyncStatus = function () {
+    const syncStatus = $("syncStatus");
+    if (syncStatus) syncStatus.hidden = true;
+  };
+
+  openDataModal = function () {
+    if (!requireEditor()) return;
+    configureDataModal();
+    $("dataModal").classList.add("active");
+    exportData();
+  };
+
+  exportData = function () {
+    const output = $("dataText");
+    if (output) output.value = JSON.stringify(data, null, 2);
+  };
+
+  importData = function () {
+    if (!requireEditor()) return;
+    try {
+      const parsed = JSON.parse($("dataText").value);
+      if (!isPortalData(parsed)) throw new Error("JSON must contain modules array");
+      data = migrateModuleNames(parsed);
+      persistDraft();
+      closeModals();
+      render();
+    } catch (error) {
+      alert("Import failed: " + error.message);
+    }
+  };
+
+  function resetDraft() {
+    if (!requireEditor()) return;
+    localStorage.removeItem(DRAFT_KEY);
+    data = clone(publishedData);
+    closeModals();
+    render();
+  }
+
+  data = loadDraft() || clone(publishedData);
+  editorMode = EDITOR_AVAILABLE && localStorage.getItem(MODE_KEY) === "1";
+  configureEditorShell();
+  setEditorMode(editorMode);
+})();
 </script>
 </body>
 </html>
