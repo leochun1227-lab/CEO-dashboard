@@ -1,0 +1,8 @@
+name = "regent-home-portal-api"
+main = "cloudflare-worker.js"
+compatibility_date = "2026-06-01"
+
+# Copy this file to wrangler.toml, then replace the id with your KV namespace id.
+[[kv_namespaces]]
+binding = "PORTAL_KV"
+id = "replace-with-your-kv-namespace-id"
