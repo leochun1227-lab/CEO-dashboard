@@ -53,6 +53,12 @@ window.PORTAL_DATA = {
           "name": "Production Dashboard",
           "url": "https://snowyapp.com.au/e-report/report",
           "note": ""
+        },
+        {
+          "id": "dealership-dashboard",
+          "name": "Dealership Dashboard",
+          "url": "dealership-dashboard.html",
+          "note": "Frankston, yard sales, and salesperson sales"
         }
       ]
     }
